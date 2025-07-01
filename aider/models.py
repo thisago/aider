@@ -997,6 +997,10 @@ class Model(ModelSettings):
 
             self.github_copilot_token_to_open_ai_key(kwargs["extra_headers"])
 
+        headers = kwargs.get("headers", {})
+        headers["Copilot-Vision-Request"] = "true"  # or the required value
+        kwargs["headers"] = headers
+
         res = litellm.completion(**kwargs)
         return hash_object, res
 
